@@ -6,7 +6,9 @@ use std::process::Command;
 fn test() {
     let output = env!("CARGO_BIN_EXE_args-to-list")
         .pipe(Command::new)
-        .with_args(&["abc", "def", "ghi"])
+        .with_arg("one")
+        .with_arg("foo bar")
+        .with_arg("abc def ghi")
         .output()
         .expect("get output");
 
@@ -23,7 +25,7 @@ fn test() {
     assert_eq!(
         (stdout, stderr, output.status.success()),
         (
-            vec!["abc", "def", "ghi", ""].join("\n"),
+            vec!["one", "foo bar", "abc def ghi", ""].join("\n"),
             "".to_string(),
             true,
         ),
