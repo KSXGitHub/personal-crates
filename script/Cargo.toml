@@ -1,0 +1,11 @@
+[package]
+name = "script"
+version = "0.0.0"
+authors = ["khai96_ <hvksmr1996@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+structopt = "^0.3.20"
+structopt-utilities = "^0.0.8"
+cargo_toml = "^0.8.1"
+pipe-trait = "^0.2.0"
