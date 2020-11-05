@@ -6,7 +6,7 @@ use std::{
     process::exit,
     str::FromStr,
 };
-use structopt::*;
+use structopt::StructOpt;
 use structopt_utilities::StructOptUtils;
 
 #[derive(StructOpt)]

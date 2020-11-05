@@ -4,7 +4,7 @@ use std::{
     fs::{copy, read_dir, read_to_string, write},
     path::PathBuf,
 };
-use structopt::*;
+use structopt::StructOpt;
 use structopt_utilities::StructOptUtils;
 
 #[derive(Debug, StructOpt)]
