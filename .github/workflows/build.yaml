@@ -48,6 +48,7 @@ jobs:
         run: ./script.sh should-deploy ${{ github.ref }}
 
       - name: Generate PKGBUILD directory
+        if: steps.should_deploy.outputs.should_deploy == 'true'
         run: ./script.sh pkgbuild release
 
       - name: Clone target repository
