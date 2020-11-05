@@ -5,6 +5,9 @@ pkgver='0.0.0'
 pkgrel='1'
 url='https://github.com/KSXGitHub/personal-crates'
 arch=('x86_64')
+depends=(
+	'libgit2'
+)
 _binaries=(BINARY_NAMES)
 source=(
 	"${_binaries[@]}"
