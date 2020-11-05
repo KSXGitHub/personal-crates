@@ -1,5 +1,6 @@
 global-settings:
   repository: pacman-repo/repo/khai.db.tar.gz
+  install-missing-dependencies: true
   dereference-database-symlinks: true
   clean-after-build: true
   packager: 'Hoàng Văn Khải <hvksmr1996@gmail.com>'
