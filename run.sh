@@ -1,2 +1,2 @@
 #! /bin/bash
-exec cargo run --release --bin="$1" -- "${@:2}"
+exec cargo run --release --locked --bin="$1" -- "${@:2}"

@@ -35,13 +35,13 @@ jobs:
         with:
           name: Clippy Report
           token: ${{ secrets.GITHUB_TOKEN }}
-          args: --all-features --all-targets --release -- -D warnings
+          args: --all-features --all-targets --release --locked -- -D warnings
 
       - name: Build
-        run: cargo build --release
+        run: cargo build --release --locked
 
       - name: Test
-        run: cargo test --release
+        run: cargo test --release --locked
 
       - name: Check formatting
         run: cargo fmt --all -- --check
