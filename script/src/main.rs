@@ -13,6 +13,7 @@ enum CliArgs {
     /// Generate `pkgbuild/PKGBUILD` from `template/PKGBUILD`
     #[structopt(name = "pkgbuild")]
     GeneratePkgBuild {
+        /// Build profile
         #[structopt(possible_values = &["release", "debug"])]
         profile: String,
     },
