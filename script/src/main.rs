@@ -37,6 +37,9 @@ fn main() {
 
     match CliArgs::strict_from_args() {
         CliArgs::GeneratePkgBuild { profile } => {
+            let pkgbuild_directory = workspace_root.join("pkgbuild");
+            let mut binary_names = Vec::new();
+
             for entry in read_dir(&crate_container).expect("read crate container") {
                 let manifest_path = entry
                     .expect("read individual entry")
@@ -48,7 +51,7 @@ fn main() {
 
                 eprintln!("{}", manifest_path.to_string_lossy());
 
-                let binary_names: Vec<_> = manifest_path
+                let local_binary_names: Vec<_> = manifest_path
                     .pipe_ref(Manifest::from_path)
                     .expect("load manifest content")
                     .bin
@@ -56,27 +59,9 @@ fn main() {
                     .map(|product| product.name.expect("access bin.name"))
                     .collect();
 
-                let binary_checksums = binary_names
-                    .iter()
-                    .map(|_| "SKIP")
-                    .collect::<Vec<_>>()
-                    .join(" ");
+                binary_names.extend_from_slice(&local_binary_names);
 
-                let pkgbuild_directory = workspace_root.join("pkgbuild").to_path_buf();
-
-                write(
-                    pkgbuild_directory.join("PKGBUILD"),
-                    workspace_root
-                        .join("template")
-                        .join("PKGBUILD")
-                        .pipe(read_to_string)
-                        .expect("read PKGBUILD template")
-                        .replace("BINARY_NAMES", &binary_names.join(" "))
-                        .replace("BINARY_CHECKSUMS", &binary_checksums),
-                )
-                .expect("write content to PKGBUILD");
-
-                for name in &binary_names {
+                for name in &local_binary_names {
                     eprintln!("  → {}", name);
                     copy(
                         workspace_root.join("target").join(&profile).join(name),
@@ -85,6 +70,24 @@ fn main() {
                     .expect("copy binary file to pkgbuild location");
                 }
             }
+
+            let binary_checksums = binary_names
+                .iter()
+                .map(|_| "SKIP")
+                .collect::<Vec<_>>()
+                .join(" ");
+
+            write(
+                pkgbuild_directory.join("PKGBUILD"),
+                workspace_root
+                    .join("template")
+                    .join("PKGBUILD")
+                    .pipe(read_to_string)
+                    .expect("read PKGBUILD template")
+                    .replace("BINARY_NAMES", &binary_names.join(" "))
+                    .replace("BINARY_CHECKSUMS", &binary_checksums),
+            )
+            .expect("write content to PKGBUILD");
         }
 
         CliArgs::ShouldDeploy { git_ref } => {
