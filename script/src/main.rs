@@ -17,6 +17,13 @@ enum CliArgs {
         #[structopt(possible_values = &["release", "debug"])]
         profile: String,
     },
+
+    /// Determine whether to deploy [GitHub Actions]
+    #[structopt(name = "should-deploy")]
+    ShouldDeploy {
+        /// Current branch/tag/ref, e.g. ${{ github.ref }}
+        git_ref: String,
+    },
 }
 
 fn main() {
@@ -78,6 +85,27 @@ fn main() {
                     .expect("copy binary file to pkgbuild location");
                 }
             }
+        }
+
+        CliArgs::ShouldDeploy { git_ref } => {
+            fn remove_prefix(prefix: &'static str) -> impl FnOnce(&str) -> &str {
+                move |text| {
+                    if text.starts_with(prefix) {
+                        &text[prefix.len()..]
+                    } else {
+                        text
+                    }
+                }
+            }
+
+            let git_ref = git_ref
+                .as_str()
+                .pipe(remove_prefix("refs/heads/"))
+                .pipe(remove_prefix("refs/tags/"))
+                .pipe(remove_prefix("refs/branches/"));
+
+            println!("::set-output name=git_ref::{}", git_ref);
+            println!("::set-output name=should_deploy::{}", git_ref == "master");
         }
     }
 }
