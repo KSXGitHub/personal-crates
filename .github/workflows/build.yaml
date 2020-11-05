@@ -1,0 +1,93 @@
+on:
+  workflow_dispatch: {}
+  push: {}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Cache
+        uses: actions/cache@v2
+        timeout-minutes: 1
+        continue-on-error: true
+        with:
+          path:
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ github.job }}-${{ runner.os }}-${{ hashFiles('rust-toolchain') }}-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ github.job }}-${{ runner.os }}-${{ hashFiles('rust-toolchain') }}-${{ hashFiles('**/Cargo.lock') }}
+            ${{ github.job }}-${{ runner.os }}-${{ hashFiles('rust-toolchain') }}-
+
+      - uses: actions-rs/toolchain@v1.0.6
+        with:
+          profile: minimal
+          components: clippy, rustfmt
+          override: 'true'
+          default: 'true'
+
+      - name: Use clippy to lint code
+        uses: actions-rs/clippy-check@v1
+        with:
+          name: Clippy Report
+          token: ${{ secrets.GITHUB_TOKEN }}
+          args: --all-features --all-targets -- -D warnings
+
+      - name: Test
+        run: cargo test --release
+
+      - name: Check formatting
+        run: cargo fmt --all -- --check
+
+      - name: Determine whether to deploy
+        id: should_deploy
+        run: ./script.sh should-deploy ${{ github.ref }}
+
+      - name: Generate PKGBUILD directory
+        run: ./script.sh pkgbuild ${{ steps.should_deploy.output.build_profile }}
+
+      - name: Clone target repository
+        if: ${{ steps.should_deploy.output.should_deploy == 'true' }}
+        run: git clone https://github.com/KSXGitHub/pacman-repo.git pacman-repo
+
+      - name: Inspect restored failed build record
+        if: ${{ steps.should_deploy.output.should_deploy == 'true' }}
+        continue-on-error: true
+        run: cat pacman-repo/failed-build-records/personal-crates.yaml
+
+      - name: Build pacman packages
+        if: ${{ steps.should_deploy.output.should_deploy == 'true' }}
+        uses: pacman-repo-builder/action@0.0.0-rc.41
+        with:
+          command: build-pacman-repo build
+
+      - name: Inspect changed failed build record
+        if: ${{ steps.should_deploy.output.should_deploy == 'true' }}
+        continue-on-error: true
+        run: cat pacman-repo/failed-build-records/personal-crates.yaml
+
+      - name: Upload packages
+        if: ${{ steps.should_deploy.output.should_deploy == 'true' }}
+        env:
+          COMMIT_AUTHOR_NAME: ${{ secrets.COMMIT_AUTHOR_NAME }}
+          COMMIT_AUTHOR_EMAIL: ${{ secrets.COMMIT_AUTHOR_EMAIL }}
+          AUTH_USERNAME: KSXGitHub
+          AUTH_PASSWORD: ${{ secrets.AUTH_PASSWORD }}
+        run: |
+          cd pacman-repo
+          git config user.name "$COMMIT_AUTHOR_NAME"
+          git config user.email "$COMMIT_AUTHOR_EMAIL"
+          git add -v .
+          git commit -m "Update by $GITHUB_REPOSITORY@$GITHUB_SHA" --allow-empty
+          echo "username=$AUTH_USERNAME" >> /tmp/git-login.txt
+          echo "password=$AUTH_PASSWORD" >> /tmp/git-login.txt
+          echo '#! /bin/bash' >> /tmp/credential-helper
+          echo 'cat /tmp/git-login.txt' >> /tmp/credential-helper
+          chmod +x /tmp/credential-helper
+          git config credential.helper '/tmp/credential-helper'
+          git pull origin master --rebase=true # to avoid conflicts due to data races
+          git push origin master
