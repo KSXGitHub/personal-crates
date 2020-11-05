@@ -37,6 +37,9 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           args: --all-features --all-targets --release -- -D warnings
 
+      - name: Build
+        run: cargo build --release
+
       - name: Test
         run: cargo test --release
 
