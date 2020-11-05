@@ -1,0 +1,9 @@
+global-settings:
+  repository: pacman-repo/repo/khai.db.tar.gz
+  dereference-database-symlinks: true
+  clean-after-build: true
+  packager: 'Hoàng Văn Khải <hvksmr1996@gmail.com>'
+  check: enabled
+  allow-failure: false
+members:
+  - directory: pkgbuild
