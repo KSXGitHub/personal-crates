@@ -21,6 +21,10 @@ dependencies = [
 [[package]]
 name = "args-to-list"
 version = "0.1.0"
+dependencies = [
+ "command-extra",
+ "pipe-trait",
+]
 
 [[package]]
 name = "atty"
