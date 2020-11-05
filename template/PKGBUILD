@@ -1,7 +1,7 @@
 # Maintainer: Hoàng Văn Khải <hvksmr1996@gmail.com>
 
 pkgname='khai-personal-rust-programs'
-pkgver='0.0.1'
+pkgver='0.0.2'
 pkgrel='1'
 url='https://github.com/KSXGitHub/personal-crates'
 arch=('x86_64')
