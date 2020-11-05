@@ -107,6 +107,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b1b4fe32ea3f2a8d975b6c5cdd3f02ac358f471ca24dbb18d7a4ca58b3193d2d"
 
 [[package]]
+name = "find-virtual-display"
+version = "0.0.0"
+dependencies = [
+ "pipe-trait",
+ "structopt",
+ "structopt-utilities",
+]
+
+[[package]]
 name = "git-all-remotes"
 version = "0.0.0"
 dependencies = [
