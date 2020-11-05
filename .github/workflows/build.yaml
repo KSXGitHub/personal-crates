@@ -43,7 +43,7 @@ jobs:
       - name: Check formatting
         run: cargo fmt --all -- --check
 
-      - name: Determine whether to deploy
+      - name: Determine whether to deploy or not
         id: should_deploy
         run: ./script.sh should-deploy ${{ github.ref }}
 
