@@ -42,6 +42,16 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "cf1de2fe8c75bc145a2f577add951f8134889b4795d47466a54a5c846d691693"
 
 [[package]]
+name = "break-line"
+version = "0.0.0"
+dependencies = [
+ "command-extra",
+ "pipe-trait",
+ "structopt",
+ "structopt-utilities",
+]
+
+[[package]]
 name = "cargo_toml"
 version = "0.8.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -81,6 +91,12 @@ dependencies = [
  "unicode-width",
  "vec_map",
 ]
+
+[[package]]
+name = "command-extra"
+version = "1.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b1b4fe32ea3f2a8d975b6c5cdd3f02ac358f471ca24dbb18d7a4ca58b3193d2d"
 
 [[package]]
 name = "git-all-remotes"
