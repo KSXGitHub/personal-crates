@@ -1,0 +1,9 @@
+[package]
+name = "join-argv"
+version = "0.1.0"
+authors = ["khai96_ <hvksmr1996@gmail.com>"]
+edition = "2018"
+
+[dev-dependencies]
+command-extra = "^1.0.0"
+pipe-trait = "^0.2.0"
