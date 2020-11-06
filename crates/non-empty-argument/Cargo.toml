@@ -1,5 +1,5 @@
 [package]
 name = "non-empty-argument"
-version = "0.1.0"
+version = "0.0.0"
 authors = ["khai96_ <hvksmr1996@gmail.com>"]
 edition = "2018"
