@@ -1,17 +1,26 @@
 use super::utils::split_once;
+use pipe_trait::*;
 use std::{
     cmp::Ordering,
     iter::{once, IntoIterator, Iterator},
     str::FromStr,
 };
 
-pub struct Sequence(Box<dyn Iterator<Item = u32>>);
+pub struct Sequence(Inner);
+
+enum Inner {
+    Once(u32),
+    Ascending(u32, u32),
+    Descending(u32, u32),
+}
+
+use Inner::*;
 
 impl FromStr for Sequence {
     type Err = String;
     fn from_str(text: &str) -> Result<Self, Self::Err> {
         if let Ok(value) = u32::from_str(text) {
-            return Ok(Sequence(Box::new(once(value))));
+            return value.pipe(Once).pipe(Sequence).pipe(Ok);
         }
 
         if let Some((begin, end)) = split_once(text, '-') {
@@ -22,9 +31,9 @@ impl FromStr for Sequence {
                 .parse::<u32>()
                 .map_err(|error| format!("Cannot parse {:?} as number: {}", end, error))?;
             return Ok(Sequence(match begin.cmp(&end) {
-                Ordering::Equal => Box::new(once(begin)),
-                Ordering::Less => Box::new(begin..end),
-                Ordering::Greater => Box::new((end + 1..begin + 1).rev()),
+                Ordering::Equal => Once(begin),
+                Ordering::Less => Ascending(begin, end),
+                Ordering::Greater => Descending(begin, end),
             }));
         };
 
@@ -35,8 +44,15 @@ impl FromStr for Sequence {
 impl IntoIterator for Sequence {
     type Item = u32;
     type IntoIter = Box<dyn Iterator<Item = u32>>;
+
     fn into_iter(self) -> Self::IntoIter {
-        self.0
+        let Sequence(inner) = self;
+
+        match inner {
+            Once(value) => Box::new(once(value)),
+            Ascending(begin, end) => Box::new(begin..end),
+            Descending(begin, end) => Box::new((end + 1..begin + 1).rev()),
+        }
     }
 }
 
