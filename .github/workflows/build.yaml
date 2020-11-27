@@ -23,7 +23,7 @@ jobs:
             ${{ github.job }}-${{ runner.os }}-${{ hashFiles('rust-toolchain') }}-${{ hashFiles('**/Cargo.lock') }}
             ${{ github.job }}-${{ runner.os }}-${{ hashFiles('rust-toolchain') }}-
 
-      - uses: actions-rs/toolchain@v1.0.6
+      - uses: actions-rs/toolchain@v1.0.7
         with:
           profile: minimal
           components: clippy, rustfmt
@@ -60,7 +60,7 @@ jobs:
 
       - name: Build pacman packages
         if: steps.should_deploy.outputs.should_deploy == 'true'
-        uses: pacman-repo-builder/action@0.0.0-rc.41
+        uses: pacman-repo-builder/action@0.0.0-rc.47
         with:
           command: build-pacman-repo build
 
