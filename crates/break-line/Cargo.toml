@@ -7,7 +7,7 @@ edition = "2018"
 [dependencies]
 structopt = "^0.3.20"
 structopt-utilities = "^0.0.8"
-pipe-trait = "^0.2.0"
+pipe-trait = "^0.2.1"
 
 [dev-dependencies]
 command-extra = "^1.0.0"
