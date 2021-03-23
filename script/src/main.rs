@@ -92,13 +92,7 @@ fn main() {
 
         CliArgs::ShouldDeploy { git_ref } => {
             fn remove_prefix(prefix: &'static str) -> impl FnOnce(&str) -> &str {
-                move |text| {
-                    if text.starts_with(prefix) {
-                        &text[prefix.len()..]
-                    } else {
-                        text
-                    }
-                }
+                move |text| text.strip_prefix(prefix).unwrap_or(text)
             }
 
             let git_ref = git_ref
