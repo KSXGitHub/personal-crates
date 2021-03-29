@@ -23,7 +23,7 @@ name = "args-to-list"
 version = "0.0.0"
 dependencies = [
  "command-extra",
- "pipe-trait 0.3.0",
+ "pipe-trait 0.3.1",
 ]
 
 [[package]]
@@ -75,7 +75,7 @@ name = "break-line"
 version = "0.0.0"
 dependencies = [
  "command-extra",
- "pipe-trait 0.3.0",
+ "pipe-trait 0.3.1",
  "structopt",
  "structopt-utilities",
 ]
@@ -123,7 +123,7 @@ name = "cjd"
 version = "0.0.0"
 dependencies = [
  "json5",
- "pipe-trait 0.3.0",
+ "pipe-trait 0.3.1",
  "serde",
  "serde_json",
  "serde_yaml",
@@ -178,7 +178,7 @@ checksum = "e88a8acf291dafb59c2d96e8f59828f3838bb1a70398823ade51a84de6a6deed"
 name = "find-virtual-display"
 version = "0.0.0"
 dependencies = [
- "pipe-trait 0.3.0",
+ "pipe-trait 0.3.1",
  "structopt",
  "structopt-utilities",
 ]
@@ -208,7 +208,7 @@ version = "0.0.0"
 dependencies = [
  "ansi_term 0.12.1",
  "git2",
- "pipe-trait 0.3.0",
+ "pipe-trait 0.3.1",
 ]
 
 [[package]]
@@ -275,7 +275,7 @@ name = "join-argv"
 version = "0.0.0"
 dependencies = [
  "command-extra",
- "pipe-trait 0.3.0",
+ "pipe-trait 0.3.1",
 ]
 
 [[package]]
@@ -454,9 +454,9 @@ checksum = "7d4c36ce339a5efdc0e3e60766952bc1df1b9e2b80cb14f1502c00aa90070ce0"
 
 [[package]]
 name = "pipe-trait"
-version = "0.3.0"
+version = "0.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ac3561d8750b7d7bf48d3d4f612e1809d9f4ddd69801cfa8fdd8910b21c282b8"
+checksum = "1f794ff1ce7b09190d7ce7b571df3a4162efeefbaa5171ac2f4675d5689d5384"
 
 [[package]]
 name = "pkg-config"
@@ -517,7 +517,7 @@ name = "script"
 version = "0.0.0"
 dependencies = [
  "cargo_toml",
- "pipe-trait 0.3.0",
+ "pipe-trait 0.3.1",
  "structopt",
  "structopt-utilities",
 ]
