@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Cache
-        uses: actions/cache@v2
+        uses: actions/cache@v2.1.4
         timeout-minutes: 1
         continue-on-error: true
         with:
@@ -60,7 +60,7 @@ jobs:
 
       - name: Build pacman packages
         if: steps.should_deploy.outputs.should_deploy == 'true'
-        uses: pacman-repo-builder/action@0.0.0-rc.47
+        uses: pacman-repo-builder/action@0.0.0-rc.56
         with:
           command: build-pacman-repo build
 
