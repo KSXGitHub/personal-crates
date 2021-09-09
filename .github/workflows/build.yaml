@@ -31,11 +31,7 @@ jobs:
           default: 'true'
 
       - name: Use clippy to lint code
-        uses: actions-rs/clippy-check@v1
-        with:
-          name: Clippy Report
-          token: ${{ secrets.GITHUB_TOKEN }}
-          args: --all-features --all-targets --release --locked -- -D warnings
+        run: cargo clippy --release --locked -- -D warnings
 
       - name: Build
         run: cargo build --release --locked
