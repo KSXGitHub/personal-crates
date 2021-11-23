@@ -23,7 +23,7 @@ name = "args-to-list"
 version = "0.0.0"
 dependencies = [
  "command-extra",
- "pipe-trait 0.3.2",
+ "pipe-trait",
 ]
 
 [[package]]
@@ -75,7 +75,7 @@ name = "break-line"
 version = "0.0.0"
 dependencies = [
  "command-extra",
- "pipe-trait 0.3.2",
+ "pipe-trait",
  "structopt",
  "structopt-utilities",
 ]
@@ -123,7 +123,7 @@ name = "cjd"
 version = "0.0.0"
 dependencies = [
  "json5",
- "pipe-trait 0.3.2",
+ "pipe-trait",
  "serde",
  "serde_json",
  "serde_yaml",
@@ -178,7 +178,7 @@ checksum = "e88a8acf291dafb59c2d96e8f59828f3838bb1a70398823ade51a84de6a6deed"
 name = "find-virtual-display"
 version = "0.0.0"
 dependencies = [
- "pipe-trait 0.3.2",
+ "pipe-trait",
  "structopt",
  "structopt-utilities",
 ]
@@ -208,7 +208,7 @@ version = "0.0.0"
 dependencies = [
  "ansi_term 0.12.1",
  "git2",
- "pipe-trait 0.3.2",
+ "pipe-trait",
 ]
 
 [[package]]
@@ -291,7 +291,7 @@ name = "join-argv"
 version = "0.0.0"
 dependencies = [
  "command-extra",
- "pipe-trait 0.3.2",
+ "pipe-trait",
 ]
 
 [[package]]
@@ -464,12 +464,6 @@ dependencies = [
 
 [[package]]
 name = "pipe-trait"
-version = "0.2.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7d4c36ce339a5efdc0e3e60766952bc1df1b9e2b80cb14f1502c00aa90070ce0"
-
-[[package]]
-name = "pipe-trait"
 version = "0.3.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3fd92f5561e74c246a0b7332e09d2364afb40b67d152c4520b3ba2a7d3dea5b3"
@@ -533,7 +527,7 @@ name = "script"
 version = "0.0.0"
 dependencies = [
  "cargo_toml",
- "pipe-trait 0.3.2",
+ "pipe-trait",
  "structopt",
  "structopt-utilities",
 ]
@@ -622,11 +616,11 @@ dependencies = [
 
 [[package]]
 name = "structopt-utilities"
-version = "0.0.8"
+version = "0.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "397e6483e84c1d75b05a077dbbc860d546d56f6527cee877c4d73e1a710b4d28"
+checksum = "86d8a1aea356c5b00463fad9e975ff02d097a360a2efadf4bc1dfbdf35302b71"
 dependencies = [
- "pipe-trait 0.2.1",
+ "pipe-trait",
  "structopt",
 ]
 
