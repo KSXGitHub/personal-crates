@@ -5,7 +5,7 @@ authors = ["khai96_ <hvksmr1996@gmail.com>"]
 edition = "2018"
 
 [dependencies]
-structopt = "^0.3.25"
+structopt = "^0.3.26"
 structopt-utilities = "^0.1.0"
 pipe-trait = "^0.3.2"
 
