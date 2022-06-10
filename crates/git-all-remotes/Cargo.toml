@@ -7,4 +7,4 @@ edition = "2018"
 [dependencies]
 git2 = "^0.14.2"
 ansi_term = "^0.12.1"
-pipe-trait = "0.4.0"
+pipe-trait = "^0.4.0"
