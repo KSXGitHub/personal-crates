@@ -6,7 +6,7 @@ use sequence::Sequence;
 use std::{
     iter::{IntoIterator, Iterator},
     path::PathBuf,
-    process::exit,
+    process::ExitCode,
 };
 use structopt::StructOpt;
 use structopt_utilities::StructOptUtils;
@@ -18,7 +18,7 @@ struct CliArgs {
     sequences: Vec<Sequence>,
 }
 
-fn main() {
+fn main() -> ExitCode {
     let CliArgs { sequences } = CliArgs::strict_from_args();
 
     let display = sequences
@@ -29,7 +29,8 @@ fn main() {
 
     if let Some(display) = display {
         println!("{}", display);
+        ExitCode::SUCCESS
     } else {
-        exit(1);
+        ExitCode::FAILURE
     }
 }

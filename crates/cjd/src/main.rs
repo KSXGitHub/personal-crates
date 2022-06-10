@@ -7,7 +7,7 @@ use serde_json::Value;
 use std::{
     fmt::Display,
     io::{stdin, stdout, Read, Write},
-    process::exit,
+    process::ExitCode,
 };
 use structopt_utilities::StructOptUtils;
 
@@ -69,9 +69,12 @@ fn app() -> Result<(), String> {
     }
 }
 
-fn main() {
-    if let Err(error) = app() {
-        eprintln!("{}", error);
-        exit(1)
+fn main() -> ExitCode {
+    match app() {
+        Ok(()) => ExitCode::SUCCESS,
+        Err(error) => {
+            eprintln!("{error}");
+            ExitCode::FAILURE
+        }
     }
 }

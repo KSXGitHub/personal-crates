@@ -1,6 +1,7 @@
 use std::{
     fmt::{self, Display, Formatter},
     io,
+    process::{ExitCode, Termination},
 };
 
 pub enum Error {
@@ -9,11 +10,17 @@ pub enum Error {
 }
 
 impl Error {
-    pub fn code(&self) -> i32 {
+    fn code(&self) -> i32 {
         match self {
             Error::Os(error) => error.raw_os_error().unwrap_or(1),
             Error::Git(error) => error.raw_code(),
         }
+    }
+}
+
+impl Termination for Error {
+    fn report(self) -> ExitCode {
+        ExitCode::from(self.code() as u8)
     }
 }
 

@@ -1,10 +1,12 @@
+mod display_result;
 mod error;
 
 use ansi_term::Style;
+use display_result::DisplayResult;
 use error::Error;
 use git2::Repository;
 use pipe_trait::*;
-use std::{env::current_dir, process::exit};
+use std::env::current_dir;
 
 fn app() -> Result<(), Error> {
     let repo = current_dir()
@@ -25,9 +27,6 @@ fn app() -> Result<(), Error> {
     Ok(())
 }
 
-fn main() {
-    if let Err(error) = app() {
-        eprintln!("ERROR: {}", error);
-        exit(error.code());
-    }
+fn main() -> DisplayResult<(), Error> {
+    DisplayResult(app())
 }
