@@ -2,6 +2,7 @@ mod args;
 mod format;
 
 use args::Args;
+use clap::Parser;
 use format::*;
 use serde_json::Value;
 use std::{
@@ -9,7 +10,6 @@ use std::{
     io::{stdin, stdout, Read, Write},
     process::ExitCode,
 };
-use structopt_utilities::StructOptUtils;
 
 fn display(x: impl Display) -> String {
     format!("{}", x)
@@ -19,7 +19,7 @@ fn app() -> Result<(), String> {
     let Args {
         input_format,
         output_format,
-    } = StructOptUtils::strict_from_args();
+    } = Parser::parse();
 
     let stdin = stdin();
 

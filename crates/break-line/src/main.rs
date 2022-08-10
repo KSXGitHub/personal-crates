@@ -1,17 +1,16 @@
-use structopt::StructOpt;
-use structopt_utilities::StructOptUtils;
+use clap::Parser;
 
-#[derive(Debug, StructOpt)]
-#[structopt(name = "break-line")]
+#[derive(Debug, Parser)]
+#[clap(name = "break-line")]
 struct CliArgs {
-    #[structopt(name = "text")]
+    #[clap(name = "text")]
     pub text: String,
-    #[structopt(name = "delimiter", default_value = ":")]
+    #[clap(name = "delimiter", default_value = ":")]
     pub delimiter: String,
 }
 
 fn main() {
-    let CliArgs { text, delimiter } = CliArgs::strict_from_args();
+    let CliArgs { text, delimiter } = CliArgs::parse();
     for component in text.split(&delimiter) {
         println!("{}", component);
     }

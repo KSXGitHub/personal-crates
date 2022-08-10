@@ -1,4 +1,6 @@
-#[derive(Debug, Eq, PartialEq, Copy, Clone)]
+use clap::ValueEnum;
+
+#[derive(Debug, Eq, PartialEq, Copy, Clone, ValueEnum)]
 pub enum Format {
     Json,
     Yaml,

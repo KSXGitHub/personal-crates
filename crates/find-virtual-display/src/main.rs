@@ -1,6 +1,7 @@
 mod sequence;
 mod utils;
 
+use clap::Parser;
 use pipe_trait::*;
 use sequence::Sequence;
 use std::{
@@ -8,18 +9,16 @@ use std::{
     path::PathBuf,
     process::ExitCode,
 };
-use structopt::StructOpt;
-use structopt_utilities::StructOptUtils;
 
-#[derive(StructOpt)]
+#[derive(Parser)]
 struct CliArgs {
     /// Sequences of display id ranges, e.g. 0-3
-    #[structopt(default_value = "255-0")]
+    #[clap(default_value = "255-0")]
     sequences: Vec<Sequence>,
 }
 
 fn main() -> ExitCode {
-    let CliArgs { sequences } = CliArgs::strict_from_args();
+    let CliArgs { sequences } = CliArgs::parse();
 
     let display = sequences
         .into_iter()
