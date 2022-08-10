@@ -13,6 +13,6 @@ struct CliArgs {
 fn main() {
     let CliArgs { text, separator } = CliArgs::parse();
     for component in text.split(&separator) {
-        println!("{}", component);
+        println!("{component}");
     }
 }
