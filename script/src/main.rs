@@ -1,25 +1,24 @@
 use cargo_toml::Manifest;
+use clap::Parser;
 use pipe_trait::*;
 use std::{
     fs::{copy, read_dir, read_to_string, write},
     path::PathBuf,
 };
-use structopt::StructOpt;
-use structopt_utilities::StructOptUtils;
 
-#[derive(Debug, StructOpt)]
-#[structopt(name = "script")]
+#[derive(Debug, Parser)]
+#[clap(name = "script")]
 enum CliArgs {
     /// Generate `pkgbuild/PKGBUILD` from `template/PKGBUILD`
-    #[structopt(name = "pkgbuild")]
+    #[clap(name = "pkgbuild")]
     GeneratePkgBuild {
         /// Build profile
-        #[structopt(possible_values = &["release", "debug"])]
+        #[clap(possible_values = &["release", "debug"])]
         profile: String,
     },
 
     /// Determine whether to deploy [GitHub Actions]
-    #[structopt(name = "should-deploy")]
+    #[clap(name = "should-deploy")]
     ShouldDeploy {
         /// Current branch/tag/ref, e.g. ${{ github.ref }}
         git_ref: String,
@@ -35,7 +34,7 @@ fn main() {
 
     let crate_container = workspace_root.join("crates");
 
-    match CliArgs::strict_from_args() {
+    match CliArgs::parse() {
         CliArgs::GeneratePkgBuild { profile } => {
             let pkgbuild_directory = workspace_root.join("pkgbuild");
             let mut binary_names = Vec::new();

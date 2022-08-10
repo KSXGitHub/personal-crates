@@ -1,16 +1,16 @@
 use super::format::*;
+use clap::Parser;
 use std::hint::unreachable_unchecked;
-use structopt::StructOpt;
 
-#[derive(Debug, StructOpt)]
+#[derive(Debug, Parser)]
 pub struct Args {
-    #[structopt(
+    #[clap(
         name = "input format",
         possible_values = &["json", "yaml", "toml", "json5"],
         parse(from_str = parse_format),
     )]
     pub input_format: Format,
-    #[structopt(
+    #[clap(
         name = "output format",
         possible_values = &["json", "yaml", "toml", "json5"],
         parse(from_str = parse_format),
