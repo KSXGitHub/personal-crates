@@ -1,6 +1,7 @@
 use super::format::*;
 use clap::Parser;
 
+/// Convert object notations between formats.
 #[derive(Debug, Parser)]
 pub struct Args {
     /// Format of the input.
