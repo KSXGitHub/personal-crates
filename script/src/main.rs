@@ -95,13 +95,16 @@ fn main() {
                 move |text| text.strip_prefix(prefix).unwrap_or(text)
             }
 
+            let version = version();
+            dbg!(&git_ref, version);
+
             let git_ref = git_ref
                 .as_str()
                 .pipe(remove_prefix("refs/heads/"))
                 .pipe(remove_prefix("refs/tags/"))
                 .pipe(remove_prefix("refs/branches/"));
 
-            let should_deploy = git_ref == version();
+            let should_deploy = git_ref == version;
             let build_profile = if should_deploy { "release" } else { "debug" };
             println!("::set-output name=git_ref::{git_ref}");
             println!("::set-output name=should_deploy::{should_deploy}");
