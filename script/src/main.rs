@@ -83,6 +83,7 @@ fn main() {
                     .join("PKGBUILD")
                     .pipe(read_to_string)
                     .expect("read PKGBUILD template")
+                    .replace("VERSION", include_str!("../../version").trim())
                     .replace("BINARY_NAMES", &binary_names.join(" "))
                     .replace("BINARY_CHECKSUMS", &binary_checksums),
             )
