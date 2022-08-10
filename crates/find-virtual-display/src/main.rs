@@ -12,7 +12,7 @@ use std::{
 
 #[derive(Parser)]
 struct CliArgs {
-    /// Sequences of display id ranges, e.g. 0-3
+    /// Sequences of display id ranges, e.g. 0-3.
     #[clap(default_value = "255-0")]
     sequences: Vec<Sequence>,
 }
