@@ -100,7 +100,8 @@ fn main() {
                 .pipe(remove_prefix("refs/tags/"))
                 .pipe(remove_prefix("refs/branches/"));
 
-            let should_deploy = git_ref == "master";
+            let version = include_str!("../../version").trim();
+            let should_deploy = git_ref == version;
             let build_profile = if should_deploy { "release" } else { "debug" };
             println!("::set-output name=git_ref::{}", git_ref);
             println!("::set-output name=should_deploy::{}", should_deploy);
