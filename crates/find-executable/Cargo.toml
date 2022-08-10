@@ -2,7 +2,7 @@
 name = "find-executable"
 version = "0.0.0"
 authors = ["khai96_ <hvksmr1996@gmail.com>"]
-edition = "2018"
+edition = "2021"
 
 [dependencies]
 clap = { version = "3.2.16", features = ["derive"] }

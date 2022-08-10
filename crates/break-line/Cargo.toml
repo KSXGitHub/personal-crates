@@ -2,7 +2,7 @@
 name = "break-line"
 version = "0.0.0"
 authors = ["khai96_ <hvksmr1996@gmail.com>"]
-edition = "2018"
+edition = "2021"
 
 [dependencies]
 structopt = "^0.3.26"
