@@ -3,7 +3,9 @@ use clap::Parser;
 #[derive(Debug, Parser)]
 #[clap(name = "break-line")]
 struct CliArgs {
+    /// String to be broken.
     pub text: String,
+    /// Separator to be used.
     #[clap(default_value = ":")]
     pub delimiter: String,
 }
