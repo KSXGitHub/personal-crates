@@ -10,6 +10,7 @@ use std::{
     process::ExitCode,
 };
 
+/// Find an unoccupied X11 display port.
 #[derive(Parser)]
 struct CliArgs {
     /// Sequences of display id ranges, e.g. 0-3.
