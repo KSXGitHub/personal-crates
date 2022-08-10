@@ -61,7 +61,7 @@ fn main() {
                 binary_names.extend_from_slice(&local_binary_names);
 
                 for name in &local_binary_names {
-                    eprintln!("  → {}", name);
+                    eprintln!("  → {name}");
                     copy(
                         workspace_root.join("target").join(&profile).join(name),
                         pkgbuild_directory.join(name),
@@ -83,6 +83,7 @@ fn main() {
                     .join("PKGBUILD")
                     .pipe(read_to_string)
                     .expect("read PKGBUILD template")
+                    .replace("VERSION", version())
                     .replace("BINARY_NAMES", &binary_names.join(" "))
                     .replace("BINARY_CHECKSUMS", &binary_checksums),
             )
@@ -100,11 +101,17 @@ fn main() {
                 .pipe(remove_prefix("refs/tags/"))
                 .pipe(remove_prefix("refs/branches/"));
 
-            let should_deploy = git_ref == "master";
+            let version = version();
+            let should_deploy = git_ref == version;
             let build_profile = if should_deploy { "release" } else { "debug" };
-            println!("::set-output name=git_ref::{}", git_ref);
-            println!("::set-output name=should_deploy::{}", should_deploy);
-            println!("::set-output name=build_profile::{}", build_profile);
+            dbg!(git_ref, version, should_deploy, build_profile);
+            println!("::set-output name=git_ref::{git_ref}");
+            println!("::set-output name=should_deploy::{should_deploy}");
+            println!("::set-output name=build_profile::{build_profile}");
         }
     }
+}
+
+fn version() -> &'static str {
+    include_str!("../../version").trim()
 }
