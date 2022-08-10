@@ -56,7 +56,7 @@ name = "break-line"
 version = "0.0.0"
 dependencies = [
  "command-extra",
- "pipe-trait 0.3.2",
+ "pipe-trait 0.4.0",
  "structopt",
  "structopt-utilities",
 ]

@@ -7,7 +7,7 @@ edition = "2021"
 [dependencies]
 structopt = "^0.3.26"
 structopt-utilities = "^0.1.0"
-pipe-trait = "^0.3.2"
+pipe-trait = "^0.4.0"
 
 [dev-dependencies]
 command-extra = "^1.0.0"
