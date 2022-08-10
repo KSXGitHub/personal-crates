@@ -83,7 +83,7 @@ fn main() {
                     .join("PKGBUILD")
                     .pipe(read_to_string)
                     .expect("read PKGBUILD template")
-                    .replace("VERSION", include_str!("../../version").trim())
+                    .replace("VERSION", version())
                     .replace("BINARY_NAMES", &binary_names.join(" "))
                     .replace("BINARY_CHECKSUMS", &binary_checksums),
             )
@@ -101,12 +101,15 @@ fn main() {
                 .pipe(remove_prefix("refs/tags/"))
                 .pipe(remove_prefix("refs/branches/"));
 
-            let version = include_str!("../../version").trim();
-            let should_deploy = git_ref == version;
+            let should_deploy = git_ref == version();
             let build_profile = if should_deploy { "release" } else { "debug" };
             println!("::set-output name=git_ref::{}", git_ref);
             println!("::set-output name=should_deploy::{}", should_deploy);
             println!("::set-output name=build_profile::{}", build_profile);
         }
     }
+}
+
+fn version() -> &'static str {
+    include_str!("../../version").trim()
 }
