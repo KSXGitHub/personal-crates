@@ -7,12 +7,12 @@ struct CliArgs {
     pub text: String,
     /// Separator to be used.
     #[clap(default_value = ":")]
-    pub delimiter: String,
+    pub separator: String,
 }
 
 fn main() {
-    let CliArgs { text, delimiter } = CliArgs::parse();
-    for component in text.split(&delimiter) {
+    let CliArgs { text, separator } = CliArgs::parse();
+    for component in text.split(&separator) {
         println!("{}", component);
     }
 }
