@@ -6,4 +6,7 @@ edition = "2021"
 
 [dependencies]
 clap = { version = "^3.2.16", features = ["derive"] }
+derive_more = "^0.99.17"
+thiserror = "^1.0.32"
+command-extra = "^1.0.0"
 pipe-trait = "^0.4.0"

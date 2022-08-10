@@ -1,12 +1,12 @@
+mod check_virtual_display;
 mod sequence;
 mod utils;
 
+use check_virtual_display::*;
 use clap::Parser;
-use pipe_trait::*;
 use sequence::Sequence;
 use std::{
     iter::{IntoIterator, Iterator},
-    path::PathBuf,
     process::ExitCode,
 };
 
@@ -20,16 +20,21 @@ struct CliArgs {
 fn main() -> ExitCode {
     let CliArgs { sequences } = CliArgs::parse();
 
-    let display = sequences
-        .into_iter()
-        .flatten()
-        .map(|x| x.to_string())
-        .find(|x| !format!("/tmp/.X{}-lock", x).pipe(PathBuf::from).exists());
+    let display_iter = sequences.into_iter().flatten().map(|x| format!(":{x}"));
 
-    if let Some(display) = display {
-        println!("{}", display);
-        ExitCode::SUCCESS
-    } else {
-        ExitCode::FAILURE
+    for display in display_iter {
+        match check_virtual_display(&display) {
+            Ok(CheckValue::Active { stdout: _ }) => continue,
+            Ok(CheckValue::Inactive { stderr: _ }) => {
+                println!("{display}");
+                return ExitCode::SUCCESS;
+            }
+            Err(error) => {
+                eprintln!("warn: (display: {display}) {error}");
+                continue;
+            }
+        }
     }
+
+    ExitCode::FAILURE
 }
