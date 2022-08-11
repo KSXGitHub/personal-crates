@@ -1,10 +1,10 @@
-mod check_virtual_display;
+mod check_input;
 mod execute_command;
 mod handle_output;
 mod sequence;
 mod utils;
 
-use check_virtual_display::*;
+use check_input::*;
 use clap::Parser;
 use handle_output::HandleOutput;
 use sequence::Sequence;
@@ -31,7 +31,7 @@ fn main() -> ExitCode {
     let display_iter = sequences.into_iter().flatten().map(|x| format!(":{x}"));
 
     for display in display_iter {
-        match check_virtual_display(&display) {
+        match check_input(&display) {
             Ok(CheckValue::Active { .. }) => continue,
             Ok(CheckValue::Inactive { .. }) => {
                 return HandleOutput::builder()

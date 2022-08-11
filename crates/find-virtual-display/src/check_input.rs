@@ -22,7 +22,7 @@ pub enum CheckError {
     Unknown(String),
 }
 
-pub fn check_virtual_display(display: impl AsRef<OsStr>) -> Result<CheckValue, CheckError> {
+pub fn check_input(display: impl AsRef<OsStr>) -> Result<CheckValue, CheckError> {
     let Output {
         status,
         stdout,
