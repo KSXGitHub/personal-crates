@@ -4,7 +4,7 @@ mod handle_output;
 mod sequence;
 mod utils;
 
-use check_input::*;
+use check_input::{check_input, CheckValue};
 use clap::Parser;
 use handle_output::HandleOutput;
 use sequence::Sequence;
