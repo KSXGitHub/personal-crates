@@ -17,7 +17,7 @@ use std::{
 /// Find an unoccupied X11 display port.
 #[derive(Parser)]
 struct CliArgs {
-    /// Execute a command with FOUND_VIRTUAL_DISPLAY env.
+    /// Execute a command with $FOUND_VIRTUAL_DISPLAY.
     #[clap(long = "exec", short = 'x', multiple_values = true, raw = true)]
     command: Vec<OsString>,
     /// Sequences of display id ranges, e.g. 0-3.
