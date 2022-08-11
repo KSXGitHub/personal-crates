@@ -29,8 +29,8 @@ impl HandleOutput {
                 .run()
                 .map_err(From::from)
         } else {
-            let (_, display_string): (u32, String) = display;
-            println!("{display_string}");
+            let (display_number, _): (u32, String) = display;
+            println!("{display_number}");
             Ok(ExitCode::SUCCESS)
         }
     }
