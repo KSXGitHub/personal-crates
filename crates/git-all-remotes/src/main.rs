@@ -7,7 +7,7 @@ use git2::Repository;
 use nu_ansi_term::Style;
 use os_display::Quotable;
 use os_str_bytes::OsStrBytes;
-use pipe_trait::*;
+use pipe_trait::Pipe;
 use std::{env::current_dir, ffi::OsStr};
 
 fn app() -> Result<(), Error> {
