@@ -1,6 +1,9 @@
+mod args;
 mod display_result;
 mod error;
 
+use args::Args;
+use clap::Parser;
 use display_result::DisplayResult;
 use error::Error;
 use git2::Repository;
@@ -8,10 +11,11 @@ use nu_ansi_term::Style;
 use os_display::Quotable;
 use os_str_bytes::OsStrBytes;
 use pipe_trait::Pipe;
-use std::{env::current_dir, ffi::OsStr};
+use std::ffi::OsStr;
 
 fn app() -> Result<(), Error> {
-    let repo = current_dir()?.pipe(Repository::open)?;
+    let Args { repo } = Parser::parse();
+    let repo = Repository::open(repo)?;
     let remotes = repo.remotes()?;
 
     let name_style = Style::new().bold();
