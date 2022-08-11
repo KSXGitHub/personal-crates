@@ -28,10 +28,14 @@ struct CliArgs {
 fn main() -> ExitCode {
     let CliArgs { command, sequences } = CliArgs::parse();
 
-    let display_iter = sequences.into_iter().flatten().map(|x| format!(":{x}"));
+    let display_iter = sequences
+        .into_iter()
+        .flatten()
+        .map(|x| (x, format!(":{x}")));
 
     for display in display_iter {
-        match check_input(&display) {
+        let (_, display_string): &(u32, String) = &display;
+        match check_input(display_string) {
             Ok(CheckValue::Active { .. }) => continue,
             Ok(CheckValue::Inactive { .. }) => {
                 return HandleOutput::builder()
@@ -45,7 +49,7 @@ fn main() -> ExitCode {
                     });
             }
             Err(error) => {
-                eprintln!("warn: (display: {display}) {error}");
+                eprintln!("warn: (display={display:?}) {error}");
                 continue;
             }
         }
