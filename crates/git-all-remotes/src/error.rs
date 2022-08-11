@@ -10,6 +10,8 @@ pub enum Error {
     Os(io::Error),
     #[error("{}", _0)]
     Git(git2::Error),
+    #[error("{}", _0)]
+    OsStrBytes(os_str_bytes::EncodingError),
 }
 
 impl Error {
@@ -17,6 +19,7 @@ impl Error {
         match self {
             Error::Os(error) => error.raw_os_error().unwrap_or(1),
             Error::Git(error) => error.raw_code(),
+            Error::OsStrBytes(_) => 1,
         }
     }
 }
