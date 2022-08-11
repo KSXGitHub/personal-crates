@@ -261,7 +261,6 @@ dependencies = [
  "clap-utilities",
  "derive_more",
  "git2",
- "json5",
  "nu-ansi-term",
  "os_display",
  "os_str_bytes",
