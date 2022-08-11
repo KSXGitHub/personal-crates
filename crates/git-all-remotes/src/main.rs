@@ -11,7 +11,7 @@ use pipe_trait::Pipe;
 use std::{env::current_dir, ffi::OsStr};
 
 fn app() -> Result<(), Error> {
-    let repo = current_dir().map_err(Error::Os)?.pipe(Repository::open)?;
+    let repo = current_dir()?.pipe(Repository::open)?;
     let remotes = repo.remotes()?;
 
     let name_style = Style::new().bold();
