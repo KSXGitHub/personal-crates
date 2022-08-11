@@ -7,18 +7,16 @@ use clap::Parser;
 use display_result::DisplayResult;
 use error::Error;
 use git2::Repository;
-use nu_ansi_term::Style;
 use os_display::Quotable;
 use os_str_bytes::OsStrBytes;
 use pipe_trait::Pipe;
-use std::ffi::OsStr;
+use std::{ffi::OsStr, io::stdout};
 
 fn app() -> Result<(), Error> {
-    let Args { repo } = Parser::parse();
+    let Args { color, repo } = Parser::parse();
     let repo = Repository::open(repo)?;
     let remotes = repo.remotes()?;
-
-    let name_style = Style::new().bold();
+    let name_style = color.style(&stdout(), |style| style.bold());
 
     for name in remotes.iter().flatten() {
         let remote = repo.find_remote(name)?;
