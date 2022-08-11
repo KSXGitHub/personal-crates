@@ -17,7 +17,7 @@ use std::{
 /// Find an unoccupied X11 display port.
 #[derive(Parser)]
 struct CliArgs {
-    /// Execute a command.
+    /// Execute a command with $FOUND_VIRTUAL_DISPLAY.
     #[clap(long = "exec", short = 'x', multiple_values = true, raw = true)]
     command: Vec<OsString>,
     /// Sequences of display id ranges, e.g. 0-3.
@@ -28,16 +28,12 @@ struct CliArgs {
 fn main() -> ExitCode {
     let CliArgs { command, sequences } = CliArgs::parse();
 
-    let display_iter = sequences
-        .into_iter()
-        .flatten()
-        .map(|x| (x, format!(":{x}")));
+    let display_iter = sequences.into_iter().flatten();
 
     for display in display_iter {
-        let (_, display_string): &(u32, String) = &display;
-        match check_input(display_string) {
-            Ok(CheckValue::Active { .. }) => continue,
-            Ok(CheckValue::Inactive { .. }) => {
+        match check_input(format!(":{display}")) {
+            Ok(CheckValue::Active) => continue,
+            Ok(CheckValue::Inactive) => {
                 return HandleOutput::builder()
                     .display(display)
                     .command(command)

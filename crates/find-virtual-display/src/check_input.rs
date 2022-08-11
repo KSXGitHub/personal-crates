@@ -10,8 +10,8 @@ use thiserror::Error;
 
 #[derive(Debug)]
 pub enum CheckValue {
-    Active { stdout: Vec<u8> },
-    Inactive { stderr: Vec<u8> },
+    Active,
+    Inactive,
 }
 
 #[derive(Debug, From, Error)]
@@ -23,24 +23,20 @@ pub enum CheckError {
 }
 
 pub fn check_input(display: impl AsRef<OsStr>) -> Result<CheckValue, CheckError> {
-    let Output {
-        status,
-        stdout,
-        stderr,
-    } = Command::new("xset")
+    let Output { status, stderr, .. } = Command::new("xset")
         .with_arg("q")
         .with_arg("-display")
         .with_arg(display)
         .output()?;
 
     if status.success() {
-        return Ok(CheckValue::Active { stdout });
+        return Ok(CheckValue::Active);
     }
 
     let error_message = String::from_utf8_lossy(&stderr);
 
     if error_message.contains("unable to open display") {
-        return Ok(CheckValue::Inactive { stderr });
+        return Ok(CheckValue::Inactive);
     }
 
     error_message
