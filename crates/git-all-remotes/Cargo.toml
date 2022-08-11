@@ -6,5 +6,5 @@ edition = "2021"
 
 [dependencies]
 git2 = "^0.15.0"
-ansi_term = "^0.12.1"
+nu-ansi-term = "^0.46.0"
 pipe-trait = "^0.4.0"

@@ -1,10 +1,10 @@
 mod display_result;
 mod error;
 
-use ansi_term::Style;
 use display_result::DisplayResult;
 use error::Error;
 use git2::Repository;
+use nu_ansi_term::Style;
 use pipe_trait::*;
 use std::env::current_dir;
 
