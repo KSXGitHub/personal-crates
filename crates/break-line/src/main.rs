@@ -1,5 +1,6 @@
 use clap::Parser;
 
+/// Break a line of text by a chosen separator.
 #[derive(Debug, Parser)]
 #[clap(name = "break-line")]
 struct CliArgs {
