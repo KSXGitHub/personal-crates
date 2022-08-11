@@ -1,11 +1,14 @@
 use std::{
-    fmt::{self, Display, Formatter},
     io,
     process::{ExitCode, Termination},
 };
+use thiserror::Error;
 
+#[derive(Debug, Error)]
 pub enum Error {
+    #[error("{}", _0)]
     Os(io::Error),
+    #[error("{}", _0)]
     Git(git2::Error),
 }
 
@@ -21,14 +24,5 @@ impl Error {
 impl Termination for Error {
     fn report(self) -> ExitCode {
         ExitCode::from(self.code() as u8)
-    }
-}
-
-impl Display for Error {
-    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
-        match self {
-            Error::Os(error) => write!(f, "{}", error),
-            Error::Git(error) => write!(f, "{}", error),
-        }
     }
 }
