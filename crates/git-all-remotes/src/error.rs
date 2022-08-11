@@ -1,3 +1,4 @@
+use crate::format::SerializationError;
 use derive_more::From;
 use std::{
     io,
@@ -13,6 +14,8 @@ pub enum Error {
     Git(git2::Error),
     #[error("{}", _0)]
     OsStrBytes(os_str_bytes::EncodingError),
+    #[error("{}", _0)]
+    Serialize(SerializationError),
 }
 
 impl Error {
@@ -21,6 +24,7 @@ impl Error {
             Error::Os(error) => error.raw_os_error().unwrap_or(1),
             Error::Git(error) => error.raw_code(),
             Error::OsStrBytes(_) => 1,
+            Error::Serialize(_) => 1,
         }
     }
 }

@@ -108,6 +108,27 @@ dependencies = [
 ]
 
 [[package]]
+name = "clap-utilities"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "27149fe92e15009adc7ae78f0d7e6919e34afb4c9bc1273d1cf47019c9be79b5"
+dependencies = [
+ "clap",
+ "clap_complete",
+ "pipe-trait",
+ "thiserror",
+]
+
+[[package]]
+name = "clap_complete"
+version = "3.2.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ead064480dfc4880a10764488415a97fdd36a4cf1bb022d372f02e8faf8386e1"
+dependencies = [
+ "clap",
+]
+
+[[package]]
 name = "clap_derive"
 version = "3.2.15"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -236,13 +257,21 @@ dependencies = [
 name = "git-all-remotes"
 version = "0.0.0"
 dependencies = [
+ "clap",
+ "clap-utilities",
  "derive_more",
  "git2",
+ "json5",
  "nu-ansi-term",
  "os_display",
  "os_str_bytes",
  "pipe-trait",
+ "serde",
+ "serde_json",
+ "serde_yaml",
  "thiserror",
+ "toml",
+ "typed-builder",
 ]
 
 [[package]]

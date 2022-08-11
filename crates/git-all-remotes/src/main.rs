@@ -1,28 +1,25 @@
+mod args;
 mod display_result;
 mod error;
+mod format;
+mod show_remote_list;
 
+use args::Args;
+use clap::Parser;
 use display_result::DisplayResult;
 use error::Error;
 use git2::Repository;
-use nu_ansi_term::Style;
-use os_display::Quotable;
-use os_str_bytes::OsStrBytes;
-use pipe_trait::Pipe;
-use std::{env::current_dir, ffi::OsStr};
+use show_remote_list::ShowRemoteList;
 
 fn app() -> Result<(), Error> {
-    let repo = current_dir()?.pipe(Repository::open)?;
-    let remotes = repo.remotes()?;
+    let Args { repo, format } = Parser::parse();
+    let repo = Repository::open(repo)?;
 
-    let name_style = Style::new().bold();
-
-    for name in remotes.iter().flatten() {
-        let remote = repo.find_remote(name)?;
-        let url = remote.url_bytes().pipe(OsStr::from_raw_bytes)?;
-        println!("{}: {}", name_style.paint(name), url.maybe_quote());
-    }
-
-    Ok(())
+    ShowRemoteList::builder()
+        .repo(repo)
+        .format(format)
+        .build()
+        .run()
 }
 
 fn main() -> DisplayResult<(), Error> {
