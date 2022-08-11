@@ -32,8 +32,8 @@ fn main() -> ExitCode {
 
     for display in display_iter {
         match check_input(format!(":{display}")) {
-            Ok(CheckValue::Active { .. }) => continue,
-            Ok(CheckValue::Inactive { .. }) => {
+            Ok(CheckValue::Active) => continue,
+            Ok(CheckValue::Inactive) => {
                 return HandleOutput::builder()
                     .display(display)
                     .command(command)
