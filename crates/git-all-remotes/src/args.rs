@@ -10,8 +10,7 @@ pub struct Args {
     #[clap(long, value_enum, default_value_t = When::Auto, name = "WHEN")]
     pub color: When,
     /// Root of the repository.
-    #[clap(default_value = ".")]
-    pub repo: PathBuf,
+    pub repo: Option<PathBuf>,
 }
 
 #[derive(Debug, Clone, Copy, ValueEnum)]

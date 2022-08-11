@@ -10,11 +10,19 @@ use git2::Repository;
 use os_display::Quotable;
 use os_str_bytes::OsStrBytes;
 use pipe_trait::Pipe;
-use std::{ffi::OsStr, io::stdout};
+use std::{env::current_dir, ffi::OsStr, io::stdout, path::PathBuf};
+
+fn get_repo(repo: Option<PathBuf>) -> Result<Repository, Error> {
+    if let Some(repo) = repo {
+        Repository::open(repo)?.pipe(Ok)
+    } else {
+        current_dir()?.pipe(Repository::discover)?.pipe(Ok)
+    }
+}
 
 fn app() -> Result<(), Error> {
     let Args { color, repo } = Parser::parse();
-    let repo = Repository::open(repo)?;
+    let repo = get_repo(repo)?;
     let remotes = repo.remotes()?;
     let name_style = color.style(&stdout(), |style| style.bold());
 
