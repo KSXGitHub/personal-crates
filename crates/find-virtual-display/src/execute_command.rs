@@ -29,7 +29,7 @@ impl<Arguments> ExecuteCommand<Arguments> {
             .with_stdin(Stdio::inherit())
             .with_stdout(Stdio::inherit())
             .with_stderr(Stdio::inherit())
-            .with_env("DISPLAY_NUMBER", display.to_string())
+            .with_env("FOUND_VIRTUAL_DISPLAY", display.to_string())
             .with_args(arguments)
             .output()?
             .status
