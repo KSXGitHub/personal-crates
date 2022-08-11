@@ -32,8 +32,8 @@ fn main() -> ExitCode {
 
     for display in display_iter {
         match check_virtual_display(&display) {
-            Ok(CheckValue::Active { stdout: _ }) => continue,
-            Ok(CheckValue::Inactive { stderr: _ }) => {
+            Ok(CheckValue::Active { .. }) => continue,
+            Ok(CheckValue::Inactive { .. }) => {
                 return HandleOutput::builder()
                     .display(display)
                     .command(command)
