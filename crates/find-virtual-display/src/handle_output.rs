@@ -6,7 +6,7 @@ use typed_builder::TypedBuilder;
 
 #[derive(Debug, TypedBuilder)]
 pub struct HandleOutput {
-    display: (u32, String),
+    display: u32,
     command: Vec<OsString>,
 }
 
@@ -29,8 +29,7 @@ impl HandleOutput {
                 .run()
                 .map_err(From::from)
         } else {
-            let (display_number, _): (u32, String) = display;
-            println!("{display_number}");
+            println!("{display}");
             Ok(ExitCode::SUCCESS)
         }
     }

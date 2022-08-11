@@ -9,7 +9,7 @@ use typed_builder::TypedBuilder;
 
 #[derive(Debug, TypedBuilder)]
 pub struct ExecuteCommand<Arguments> {
-    display: (u32, String),
+    display: u32,
     program: OsString,
     arguments: Arguments,
 }
@@ -20,7 +20,7 @@ impl<Arguments> ExecuteCommand<Arguments> {
         Arguments: Iterator<Item = OsString>,
     {
         let ExecuteCommand {
-            display: (display_number, display_string),
+            display,
             program,
             arguments,
         } = self;
@@ -29,8 +29,7 @@ impl<Arguments> ExecuteCommand<Arguments> {
             .with_stdin(Stdio::inherit())
             .with_stdout(Stdio::inherit())
             .with_stderr(Stdio::inherit())
-            .with_env("DISPLAY_NUMBER", display_number.to_string())
-            .with_env("DISPLAY_STRING", display_string)
+            .with_env("DISPLAY_NUMBER", display.to_string())
             .with_args(arguments)
             .output()?
             .status
