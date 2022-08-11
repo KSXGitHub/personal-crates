@@ -11,21 +11,15 @@ use pipe_trait::*;
 use std::{env::current_dir, ffi::OsStr};
 
 fn app() -> Result<(), Error> {
-    let repo = current_dir()
-        .map_err(Error::Os)?
-        .pipe(Repository::open)
-        .map_err(Error::Git)?;
+    let repo = current_dir().map_err(Error::Os)?.pipe(Repository::open)?;
 
-    let remotes = repo.remotes().map_err(Error::Git)?;
+    let remotes = repo.remotes()?;
 
     let name_style = Style::new().bold();
 
     for name in remotes.iter().flatten() {
-        let remote = repo.find_remote(name).map_err(Error::Git)?;
-        let url = remote
-            .url_bytes()
-            .pipe(OsStr::from_raw_bytes)
-            .map_err(Error::OsStrBytes)?;
+        let remote = repo.find_remote(name)?;
+        let url = remote.url_bytes().pipe(OsStr::from_raw_bytes)?;
         println!("{}: {}", name_style.paint(name), url.maybe_quote());
     }
 

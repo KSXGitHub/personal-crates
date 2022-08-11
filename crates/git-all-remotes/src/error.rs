@@ -1,10 +1,11 @@
+use derive_more::From;
 use std::{
     io,
     process::{ExitCode, Termination},
 };
 use thiserror::Error;
 
-#[derive(Debug, Error)]
+#[derive(Debug, From, Error)]
 pub enum Error {
     #[error("{}", _0)]
     Os(io::Error),
