@@ -28,7 +28,7 @@ fn app() -> Result<(), Error> {
 
     for name in remotes.iter().flatten() {
         let remote = repo.find_remote(name)?;
-        let url = remote.url_bytes().pipe(OsStr::from_raw_bytes)?;
+        let url = remote.url_bytes().pipe(OsStr::assert_from_raw_bytes);
         println!("{}: {}", name_style.paint(name), url.maybe_quote());
     }
 
