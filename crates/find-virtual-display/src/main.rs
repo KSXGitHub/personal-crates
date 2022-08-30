@@ -1,8 +1,6 @@
 mod check_input;
 mod execute_command;
 mod handle_output;
-mod sequence;
-mod utils;
 
 use check_input::{check_input, CheckValue};
 use clap::Parser;

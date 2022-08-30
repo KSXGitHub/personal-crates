@@ -1,10 +1,12 @@
-use super::utils::split_once;
+mod utils;
+
 use pipe_trait::*;
 use std::{
     cmp::Ordering,
     iter::{once, IntoIterator, Iterator},
     str::FromStr,
 };
+use utils::split_once;
 
 pub struct Sequence(Inner);
 
