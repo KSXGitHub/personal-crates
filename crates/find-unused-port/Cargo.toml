@@ -7,7 +7,7 @@ edition = "2021"
 [dependencies]
 clap = { version = "^3.2.22", features = ["derive"] }
 derive_more = "^0.99.17"
-thiserror = "^1.0.36"
+thiserror = "^1.0.37"
 typed-builder = "0.10.0"
 command-extra = "^1.0.0"
 portpicker = "^0.1.1"
