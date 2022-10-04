@@ -5,7 +5,7 @@ authors = ["khai96_ <hvksmr1996@gmail.com>"]
 edition = "2021"
 
 [dependencies]
-clap = { version = "^3.2.22", features = ["derive"] }
+clap = { version = "^4.0.9", features = ["derive"] }
 pipe-trait = "^0.4.0"
 
 [dev-dependencies]
