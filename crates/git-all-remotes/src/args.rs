@@ -1,7 +1,7 @@
 use clap::{Parser, ValueEnum};
 use is_terminal::IsTerminal;
-use nu_ansi_term::Style;
 use std::path::PathBuf;
+use yansi::Style;
 
 /// Show all remotes in a repository.
 #[derive(Debug, Parser)]
@@ -22,7 +22,7 @@ pub enum When {
 
 impl When {
     pub fn style(self, stream: &impl IsTerminal, style: impl FnOnce(Style) -> Style) -> Style {
-        let blank = Style::new();
+        let blank = Style::default();
         match self {
             When::Never => return blank,
             When::Always => return style(blank),
