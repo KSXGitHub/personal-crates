@@ -20,6 +20,7 @@ sha512sums=(
 	BINARY_CHECKSUMS
 	'SKIP'
 )
+license=(MIT)
 
 package() {
 	for binary_name in "${_binaries[@]}"; do
