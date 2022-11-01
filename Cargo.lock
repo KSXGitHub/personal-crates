@@ -46,7 +46,7 @@ dependencies = [
 name = "break-line"
 version = "0.0.0"
 dependencies = [
- "clap 3.2.22",
+ "clap",
  "command-extra",
  "pipe-trait",
 ]
@@ -80,7 +80,7 @@ checksum = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
 name = "cjd"
 version = "0.0.0"
 dependencies = [
- "clap 3.2.22",
+ "clap",
  "json5",
  "pipe-trait",
  "serde",
@@ -91,31 +91,14 @@ dependencies = [
 
 [[package]]
 name = "clap"
-version = "3.2.22"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "86447ad904c7fb335a790c9d7fe3d0d971dc523b8ccd1561a520de9a85302750"
-dependencies = [
- "atty",
- "bitflags",
- "clap_derive 3.2.18",
- "clap_lex 0.2.4",
- "indexmap",
- "once_cell",
- "strsim",
- "termcolor",
- "textwrap",
-]
-
-[[package]]
-name = "clap"
 version = "4.0.15"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6bf8832993da70a4c6d13c581f4463c2bdda27b9bf1c5498dc4365543abe6d6f"
 dependencies = [
  "atty",
  "bitflags",
- "clap_derive 4.0.13",
- "clap_lex 0.3.0",
+ "clap_derive",
+ "clap_lex",
  "once_cell",
  "strsim",
  "termcolor",
@@ -127,7 +110,7 @@ version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "15bcff807ef65113605e59223ac0ce77adc2cc0976e3ece014e0f2c17e4a7798"
 dependencies = [
- "clap 4.0.15",
+ "clap",
  "clap_complete",
  "pipe-trait",
  "thiserror",
@@ -139,20 +122,7 @@ version = "4.0.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "11cba7abac9b56dfe2f035098cdb3a43946f276e6db83b72c4e692343f9aab9a"
 dependencies = [
- "clap 4.0.15",
-]
-
-[[package]]
-name = "clap_derive"
-version = "3.2.18"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ea0c8bce528c4be4da13ea6fead8965e95b6073585a2f05204bd8f4119f82a65"
-dependencies = [
- "heck",
- "proc-macro-error",
- "proc-macro2",
- "quote",
- "syn",
+ "clap",
 ]
 
 [[package]]
@@ -166,15 +136,6 @@ dependencies = [
  "proc-macro2",
  "quote",
  "syn",
-]
-
-[[package]]
-name = "clap_lex"
-version = "0.2.4"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2850f2f5a82cbf437dd5af4d49848fbdfc27c157c3d010345776f952765261c5"
-dependencies = [
- "os_str_bytes",
 ]
 
 [[package]]
@@ -271,7 +232,7 @@ dependencies = [
 name = "find-executable"
 version = "0.0.0"
 dependencies = [
- "clap 3.2.22",
+ "clap",
  "libc",
  "os_display",
  "serde_json",
@@ -282,7 +243,7 @@ dependencies = [
 name = "find-unused-port"
 version = "0.0.0"
 dependencies = [
- "clap 3.2.22",
+ "clap",
  "command-extra",
  "derive_more",
  "pipe-trait",
@@ -296,7 +257,7 @@ dependencies = [
 name = "find-virtual-display"
 version = "0.0.0"
 dependencies = [
- "clap 3.2.22",
+ "clap",
  "command-extra",
  "derive_more",
  "pipe-trait",
@@ -340,7 +301,7 @@ dependencies = [
 name = "git-all-remotes"
 version = "0.0.0"
 dependencies = [
- "clap 3.2.22",
+ "clap",
  "clap-utilities",
  "derive_more",
  "git2",
@@ -432,7 +393,7 @@ dependencies = [
 name = "is-port-free"
 version = "0.0.0"
 dependencies = [
- "clap 3.2.22",
+ "clap",
  "pipe-trait",
  "portpicker",
 ]
@@ -786,7 +747,7 @@ name = "script"
 version = "0.0.0"
 dependencies = [
  "cargo_toml",
- "clap 3.2.22",
+ "clap",
  "pipe-trait",
 ]
 
@@ -883,12 +844,6 @@ checksum = "bab24d30b911b2376f3a13cc2cd443142f0c81dda04c118693e35b3835757755"
 dependencies = [
  "winapi-util",
 ]
-
-[[package]]
-name = "textwrap"
-version = "0.15.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "949517c0cf1bf4ee812e2e07e08ab448e3ae0d23472aee8a06c985f0c8815b16"
 
 [[package]]
 name = "thiserror"
