@@ -16,7 +16,7 @@ use std::{
 #[derive(Parser)]
 struct CliArgs {
     /// Execute a command with $FOUND_VIRTUAL_DISPLAY.
-    #[clap(long = "exec", short = 'x', multiple_values = true, raw = true)]
+    #[clap(long = "exec", short = 'x', raw = true)]
     command: Vec<OsString>,
     /// Sequences of display id ranges, e.g. 0-3.
     #[clap(default_value = "255-0")]

@@ -11,7 +11,7 @@ use std::{ffi::OsString, process::ExitCode};
 #[derive(Parser)]
 struct CliArgs {
     /// Execute a command with $FOUND_UNUSED_PORT.
-    #[clap(long = "exec", short = 'x', multiple_values = true, raw = true)]
+    #[clap(long = "exec", short = 'x', raw = true)]
     command: Vec<OsString>,
     /// Sequences of port ranges, e.g. 5000-9999.
     sequences: Vec<Sequence>,

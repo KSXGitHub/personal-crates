@@ -8,8 +8,10 @@ use std::{
 };
 use utils::split_once;
 
+#[derive(Debug, Clone)]
 pub struct Sequence(Inner);
 
+#[derive(Debug, Clone)]
 enum Inner {
     Once(u32),
     Ascending(u32, u32),
