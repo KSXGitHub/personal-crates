@@ -1,5 +1,5 @@
 use cargo_toml::Manifest;
-use clap::{builder::PossibleValue, Parser};
+use clap::Parser;
 use pipe_trait::*;
 use std::{
     fs::{copy, read_dir, read_to_string, write},
@@ -13,10 +13,7 @@ enum CliArgs {
     #[clap(name = "pkgbuild")]
     GeneratePkgBuild {
         /// Build profile
-        #[clap(value_parser = [
-            PossibleValue::new("release"),
-            PossibleValue::new("debug"),
-        ])]
+        #[clap(value_parser = ["release", "debug"])]
         profile: String,
     },
 
