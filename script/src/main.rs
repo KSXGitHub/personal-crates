@@ -2,7 +2,9 @@ use cargo_toml::Manifest;
 use clap::Parser;
 use pipe_trait::*;
 use std::{
-    fs::{copy, read_dir, read_to_string, write},
+    env,
+    fs::{copy, read_dir, read_to_string, write, OpenOptions},
+    io::Write,
     path::PathBuf,
 };
 
@@ -95,6 +97,32 @@ fn main() {
                 move |text| text.strip_prefix(prefix).unwrap_or(text)
             }
 
+            let mut github_output = match env::var_os("GITHUB_OUTPUT")
+                .map(|path| OpenOptions::new().create(true).append(true).open(path))
+            {
+                Some(Ok(file)) => Some(file),
+                Some(Err(error)) => {
+                    eprintln!("warning: Failed to open $GITHUB_OUTPUT");
+                    eprintln!("{error}");
+                    None
+                }
+                None => None,
+            };
+
+            macro_rules! set_output {
+                ($name:expr, $value:expr) => {{
+                    let name = $name;
+                    let value = $value;
+                    if let Some(file) = &mut github_output {
+                        writeln!(file, "{name}={value}").unwrap_or_else(|error| {
+                            panic!("Failed to write variable {name:?} in file {file:?}: {error}",)
+                        });
+                    } else {
+                        println!("::set-output name={name}::{value}");
+                    }
+                }};
+            }
+
             let git_ref = git_ref
                 .as_str()
                 .pipe(remove_prefix("refs/heads/"))
@@ -105,9 +133,9 @@ fn main() {
             let should_deploy = git_ref == version;
             let build_profile = if should_deploy { "release" } else { "debug" };
             dbg!(git_ref, version, should_deploy, build_profile);
-            println!("::set-output name=git_ref::{git_ref}");
-            println!("::set-output name=should_deploy::{should_deploy}");
-            println!("::set-output name=build_profile::{build_profile}");
+            set_output!("git_ref", git_ref);
+            set_output!("should_deploy", should_deploy);
+            set_output!("build_profile", build_profile);
         }
     }
 }
