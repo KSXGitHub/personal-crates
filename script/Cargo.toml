@@ -5,6 +5,6 @@ authors = ["khai96_ <hvksmr1996@gmail.com>"]
 edition = "2021"
 
 [dependencies]
-clap = { version = "^4.0.26", features = ["derive"] }
+clap = { version = "^4.0.27", features = ["derive"] }
 cargo_toml = "^0.13.0"
 pipe-trait = "^0.4.0"
