@@ -8,7 +8,7 @@ edition = "2021"
 [dependencies]
 clap = { version = "^4.0.26", features = ["derive"] }
 pipe-trait = "^0.4.0"
-serde = "^1.0.144"
+serde = "^1.0.148"
 serde_json = "^1.0.87"
 serde_yaml = "^0.9.13"
 toml = "^0.5.9"
