@@ -6,7 +6,7 @@ authors = ["khai96_ <hvksmr1996@gmail.com>"]
 edition = "2021"
 
 [dependencies]
-clap = { version = "^4.0.26", features = ["derive"] }
+clap = { version = "^4.0.27", features = ["derive"] }
 pipe-trait = "^0.4.0"
 serde = "^1.0.148"
 serde_json = "^1.0.87"
