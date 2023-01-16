@@ -5,7 +5,7 @@ authors = ["khai96_ <hvksmr1996@gmail.com>"]
 edition = "2021"
 
 [dependencies]
-clap = { version = "^4.0.29", features = ["derive"] }
+clap = { version = "^4.1.1", features = ["derive"] }
 derive_more = "^0.99.17"
 thiserror = "^1.0.38"
 typed-builder = "0.11.0"
