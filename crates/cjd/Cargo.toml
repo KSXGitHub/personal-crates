@@ -10,6 +10,6 @@ clap = { version = "^4.1.2", features = ["derive"] }
 pipe-trait = "^0.4.0"
 serde = "^1.0.151"
 serde_json = "^1.0.87"
-serde_yaml = "^0.9.16"
+serde_yaml = "^0.9.17"
 toml = "^0.6.0"
 json5 = "^0.4.1"
