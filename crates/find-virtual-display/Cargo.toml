@@ -8,7 +8,7 @@ edition = "2021"
 clap = { version = "^4.1.4", features = ["derive"] }
 derive_more = "^0.99.17"
 thiserror = "^1.0.38"
-typed-builder = "0.11.0"
+typed-builder = "0.12.0"
 command-extra = "^1.0.0"
 pipe-trait = "^0.4.0"
 sequence = { path = "../sequence" }
