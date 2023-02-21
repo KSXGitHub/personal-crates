@@ -5,7 +5,7 @@ authors = ["khai96_ <hvksmr1996@gmail.com>"]
 edition = "2021"
 
 [dependencies]
-clap = { version = "4.1.4", features = ["derive"] }
+clap = { version = "4.1.6", features = ["derive"] }
 serde_json = "1.0.93"
 which = "4.4.0"
 os_display = "0.1.3"
