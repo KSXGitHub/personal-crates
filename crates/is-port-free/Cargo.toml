@@ -5,6 +5,6 @@ authors = ["khai96_ <hvksmr1996@gmail.com>"]
 edition = "2021"
 
 [dependencies]
-clap = { version = "^4.1.7", features = ["derive"] }
+clap = { version = "^4.1.11", features = ["derive"] }
 portpicker = "^0.1.1"
 pipe-trait = "^0.4.0"
