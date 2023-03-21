@@ -6,5 +6,5 @@ edition = "2021"
 
 [dependencies]
 clap = { version = "^4.1.11", features = ["derive"] }
-cargo_toml = "^0.14.1"
+cargo_toml = "^0.15.2"
 pipe-trait = "^0.4.0"
