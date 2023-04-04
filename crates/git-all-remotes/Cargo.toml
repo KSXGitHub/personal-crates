@@ -5,7 +5,7 @@ authors = ["khai96_ <hvksmr1996@gmail.com>"]
 edition = "2021"
 
 [dependencies]
-git2 = "^0.16.1"
+git2 = "^0.17.0"
 yansi = "^0.5.1"
 thiserror = "^1.0.39"
 derive_more = "^0.99.17"
