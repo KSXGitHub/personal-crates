@@ -1,0 +1,10 @@
+[package]
+name = "parse-git-porcelain-status"
+version = "0.0.0"
+authors = ["khai96_ <hvksmr1996@gmail.com>"]
+edition = "2021"
+
+[dependencies]
+clap = { version = "^4.1.11", features = ["derive"] }
+split-first-char = "^0.0.0"
+pipe-trait = "^0.4.0"

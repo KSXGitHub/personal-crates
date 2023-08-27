@@ -584,6 +584,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "parse-git-porcelain-status"
+version = "0.0.0"
+dependencies = [
+ "clap",
+ "pipe-trait",
+ "split-first-char",
+]
+
+[[package]]
 name = "percent-encoding"
 version = "2.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -821,6 +830,12 @@ dependencies = [
  "cpufeatures",
  "digest",
 ]
+
+[[package]]
+name = "split-first-char"
+version = "0.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "87ce492fd669c5b32b3e629c0b35278c51d4fae83176e248c9dea71f39c86e58"
 
 [[package]]
 name = "strsim"
