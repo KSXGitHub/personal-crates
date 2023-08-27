@@ -46,8 +46,9 @@ fn main() {
                     .expect("read individual entry")
                     .path()
                     .join("Cargo.toml");
+
                 if !manifest_path.exists() {
-                    return;
+                    continue;
                 }
 
                 eprintln!("{}", manifest_path.display());
