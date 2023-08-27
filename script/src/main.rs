@@ -50,7 +50,7 @@ fn main() {
                     return;
                 }
 
-                eprintln!("{}", manifest_path.to_string_lossy());
+                eprintln!("{}", manifest_path.display());
 
                 let local_binary_names: Vec<_> = manifest_path
                     .pipe_ref(Manifest::from_path)
