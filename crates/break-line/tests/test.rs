@@ -25,11 +25,7 @@ fn output(mut command: Command) -> (String, String, bool) {
 fn default_delimiter() {
     assert_eq!(
         program().with_arg("abc:def:ghi").pipe(output),
-        (
-            vec!["abc", "def", "ghi", ""].join("\n"),
-            "".to_string(),
-            true
-        ),
+        (["abc", "def", "ghi", ""].join("\n"), "".to_string(), true),
     )
 }
 
@@ -41,7 +37,7 @@ fn specified_delimiter() {
             .with_arg(",")
             .pipe(output),
         (
-            vec!["abc", "def:ghi", "jkl:mno", ""].join("\n"),
+            ["abc", "def:ghi", "jkl:mno", ""].join("\n"),
             "".to_string(),
             true
         ),

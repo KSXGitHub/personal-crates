@@ -25,7 +25,7 @@ fn test() {
     assert_eq!(
         (stdout, stderr, output.status.success()),
         (
-            vec!["one", "foo bar", "abc def ghi", ""].join("\n"),
+            ["one", "foo bar", "abc def ghi", ""].join("\n"),
             "".to_string(),
             true,
         ),
