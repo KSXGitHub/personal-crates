@@ -51,6 +51,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "args-to-json"
+version = "0.0.0"
+dependencies = [
+ "command-extra",
+ "pipe-trait",
+ "serde",
+ "serde_json",
+]
+
+[[package]]
 name = "args-to-list"
 version = "0.0.0"
 dependencies = [

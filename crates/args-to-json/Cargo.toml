@@ -1,0 +1,13 @@
+[package]
+name = "args-to-json"
+version = "0.0.0"
+authors = ["khai96_ <hvksmr1996@gmail.com>"]
+edition = "2021"
+
+[dependencies]
+serde = "^1.0.159"
+serde_json = "^1.0.95"
+
+[dev-dependencies]
+pipe-trait = "^0.4.0"
+command-extra = "^1.0.0"
